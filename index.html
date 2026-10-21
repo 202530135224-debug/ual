@@ -1,31 +1,73 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Loja de Roupas</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
-<link rel="stylesheet" href="style.css">
+
 <body>
 
-    <h1>Loja de Roupas</h1>
+    <header class="cabecalho">
+        <h1>Loja de Roupas</h1>
+        <p>Estilo, elegância e novidades para você!</p>
+    </header>
 
-    <h2>Cadastrar produto</h2>
+    <main class="container">
 
-    <input id="nome" placeholder="Nome do produto">
+        <section class="formulario">
+            <h2>Cadastrar produto</h2>
 
-    <button onclick="salvar()">
-        Salvar
-    </button>
+            <form onsubmit="event.preventDefault(); salvar();">
+                <label for="nome">Nome do produto</label>
 
-    <p id="mensagem"></p>
+                <input
+                    type="text"
+                    id="nome"
+                    placeholder="Ex.: Camiseta básica"
+                    required
+                >
 
-    <h2>Produtos cadastrados</h2>
+                <button type="submit">
+                    + Cadastrar produto
+                </button>
+            </form>
 
-    <ul id="lista"></ul>
+            <p id="mensagem" aria-live="polite"></p>
+        </section>
+
+        <section class="secao-produtos">
+
+            <div class="titulo-produtos">
+                <span class="etiqueta-produtos">
+                    NOSSA COLEÇÃO
+                </span>
+
+                <h2>Produtos Cadastrados</h2>
+
+                <p>
+                    Confira os produtos registrados na nossa loja.
+                </p>
+
+                <div class="linha-decorativa"></div>
+            </div>
+
+            <ul id="lista" class="lista-produtos"></ul>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Loja de Roupas © 2026 — Feito com carinho.</p>
+    </footer>
 
     <script src="script.js"></script>
 
 </body>
-
 </html>
