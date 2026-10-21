@@ -74,6 +74,35 @@
 
         </section>
 
+<section class="formulario">
+    <h2>Cadastrar produto</h2>
+
+    <form id="formProduto">
+        <label for="nome">Nome do produto</label>
+        <input id="nome" type="text"
+               placeholder="Ex.: Camiseta básica" required>
+
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao"
+                  placeholder="Descreva o produto..."
+                  required></textarea>
+
+        <label for="preco">Preço (R$)</label>
+        <input id="preco" type="number"
+               min="0.01" step="0.01"
+               placeholder="Ex.: 59.90" required>
+
+        <label for="imagem">Link da imagem</label>
+        <input id="imagem" type="url"
+               placeholder="https://site.com/imagem.jpg"
+               required>
+
+        <button type="submit">Cadastrar produto</button>
+    </form>
+
+    <p id="mensagem" aria-live="polite"></p>
+</section>
+
     </main>
 
     <footer>
