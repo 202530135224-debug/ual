@@ -1,543 +1,472 @@
-
-/* ==========================
-   1. CONFIGURAÇÕES GERAIS
-========================== */
-
-:root {
-    --roxo-escuro: #241044;
-    --roxo: #6c3ce9;
-    --roxo-claro: #eee7ff;
-    --rosa: #f3b6d2;
-    --fundo: #f8f7fc;
-    --branco: #ffffff;
-    --texto: #29243a;
-    --texto-suave: #777187;
-    --borda: #e9e4f2;
-    --verde: #16865b;
-    --sombra: 0 10px 35px rgba(50, 30, 90, 0.08);
-}
+```css
+/* =========================
+   CONFIGURAÇÕES GERAIS
+========================= */
 
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 90px;
 }
 
 body {
-    margin: 0;
-    font-family: "Segoe UI", Arial, sans-serif;
-    background: var(--fundo);
-    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fffaf8;
+    color: #30272b;
     line-height: 1.6;
 }
 
-/* ==========================
-   2. CABEÇALHO
-========================== */
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+:root {
+    --rosa: #c65d7b;
+    --rosa-escuro: #a94362;
+    --rosa-claro: #fbe8ee;
+    --fundo: #fffaf8;
+    --branco: #ffffff;
+    --texto: #30272b;
+    --texto-claro: #786b70;
+    --borda: #eadde1;
+    --sombra: 0 8px 25px rgba(73, 37, 49, 0.07);
+}
+
+/* =========================
+   CABEÇALHO
+========================= */
 
 .cabecalho {
-    background: linear-gradient(
-        135deg,
-        var(--roxo-escuro),
-        var(--roxo)
-    );
-    color: var(--branco);
-    text-align: center;
-    padding: 55px 20px;
-    position: relative;
-    overflow: hidden;
+    background: var(--branco);
+    border-bottom: 1px solid var(--borda);
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-.cabecalho h1 {
-    margin: 0 0 12px;
-    font-size: clamp(28px, 5vw, 46px);
-    font-weight: 800;
-    letter-spacing: -1px;
-}
-
-.cabecalho p {
+.cabecalho-conteudo {
+    max-width: 1150px;
+    min-height: 76px;
     margin: 0 auto;
-    max-width: 600px;
-    color: #eee7ff;
-    font-size: 17px;
+    padding: 15px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
 }
 
-/* ==========================
-   3. CONTEÚDO PRINCIPAL
-========================== */
+.logo {
+    font-size: 27px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: var(--texto);
+}
+
+.logo span {
+    color: var(--rosa);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+nav a {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--texto-claro);
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: var(--rosa);
+}
+
+/* =========================
+   BANNER PRINCIPAL
+========================= */
+
+.banner {
+    min-height: 350px;
+    padding: 65px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            #f8dce5 0,
+            transparent 38%
+        ),
+        linear-gradient(135deg, #fff0f4, #fffaf8 70%);
+}
+
+.banner-conteudo {
+    max-width: 720px;
+}
+
+.subtitulo,
+.etiqueta {
+    display: inline-block;
+    color: var(--rosa-escuro);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.banner h1 {
+    margin: 15px 0;
+    font-size: clamp(34px, 5vw, 55px);
+    line-height: 1.15;
+    letter-spacing: -1.5px;
+}
+
+.banner p {
+    max-width: 520px;
+    margin: 0 auto 27px;
+    color: var(--texto-claro);
+    font-size: 16px;
+}
+
+.botao-banner {
+    display: inline-block;
+    padding: 13px 25px;
+    border-radius: 8px;
+    background: var(--rosa);
+    color: var(--branco);
+    font-size: 14px;
+    font-weight: 700;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.botao-banner:hover {
+    background: var(--rosa-escuro);
+    transform: translateY(-2px);
+}
+
+/* =========================
+   CONTEÚDO
+========================= */
 
 .container {
-    width: min(1100px, calc(100% - 36px));
-    margin: 45px auto;
+    width: min(1100px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 55px 0 70px;
 }
 
-h2 {
-    color: var(--roxo-escuro);
-    font-size: 27px;
-    margin: 0 0 22px;
-    font-weight: 750;
-}
-
-h3 {
-    color: var(--roxo-escuro);
-}
-
-/* ==========================
-   4. FORMULÁRIO
-========================== */
+/* =========================
+   FORMULÁRIO
+========================= */
 
 .formulario {
     max-width: 650px;
-    margin: 0 auto 55px;
+    margin: 0 auto 75px;
     padding: 32px;
     background: var(--branco);
     border: 1px solid var(--borda);
-    border-radius: 22px;
+    border-radius: 16px;
     box-shadow: var(--sombra);
 }
 
-.formulario h2 {
-    text-align: center;
+.titulo-secao {
+    margin-bottom: 25px;
 }
 
-form {
+.titulo-secao h2,
+.titulo-produtos h2 {
+    margin-top: 7px;
+    font-size: 28px;
+    line-height: 1.3;
+}
+
+.titulo-secao p,
+.titulo-produtos p {
+    margin-top: 8px;
+    color: var(--texto-claro);
+    font-size: 14px;
+}
+
+.campo {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
+    margin-bottom: 20px;
 }
 
-label {
-    margin-top: 8px;
+.campo label {
     font-size: 14px;
     font-weight: 700;
-    color: var(--roxo-escuro);
 }
 
-input,
-textarea,
-select {
+.campo input,
+.campo textarea {
     width: 100%;
-    padding: 14px 16px;
+    padding: 13px 14px;
     border: 1px solid var(--borda);
-    border-radius: 12px;
-    background: #fdfcff;
+    border-radius: 8px;
+    outline: none;
+    background: #fffdfd;
     color: var(--texto);
-    font: inherit;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-input::placeholder,
-textarea::placeholder {
-    color: #aaa3b8;
+.campo input:focus,
+.campo textarea:focus {
+    border-color: var(--rosa);
+    box-shadow: 0 0 0 3px rgba(198, 93, 123, 0.12);
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-    outline: none;
-    border-color: var(--roxo);
-    box-shadow: 0 0 0 4px rgba(108, 60, 233, 0.12);
-}
-
-textarea {
-    min-height: 120px;
+.campo textarea {
     resize: vertical;
+    min-height: 100px;
 }
 
-/* ==========================
-   5. BOTÕES
-========================== */
+.campo input::placeholder,
+.campo textarea::placeholder {
+    color: #ad9fa4;
+}
 
-button {
-    margin-top: 12px;
-    padding: 14px 22px;
+.campo small {
+    color: var(--texto-claro);
+    font-size: 12px;
+}
+
+.botao-cadastrar {
+    width: 100%;
+    padding: 14px 18px;
     border: none;
-    border-radius: 12px;
-    background: linear-gradient(
-        135deg,
-        var(--roxo),
-        #875cf6
-    );
+    border-radius: 8px;
+    background: var(--rosa);
     color: var(--branco);
-    font-size: 15px;
-    font-weight: 750;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(108, 60, 233, 0.22);
-    transition: transform 0.2s, box-shadow 0.2s;
+    font-weight: 700;
+    transition: background 0.2s, transform 0.2s;
 }
 
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 22px rgba(108, 60, 233, 0.3);
+.botao-cadastrar:hover {
+    background: var(--rosa-escuro);
+    transform: translateY(-1px);
 }
-
-button:active {
-    transform: translateY(0);
-}
-
-button:focus-visible {
-    outline: 3px solid var(--rosa);
-    outline-offset: 3px;
-}
-
-/* ==========================
-   6. MENSAGENS
-========================== */
 
 #mensagem {
-    margin-top: 16px;
-    padding: 12px;
-    border-radius: 10px;
-    overflow-wrap: anywhere;
-}
-
-#mensagem:empty {
-    display: none;
-}
-
-/* ==========================
-   7. GRADE DE PRODUTOS
-========================== */
-
-.produtos {
-    display: grid;
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(min(100%, 240px), 1fr)
-    );
-    gap: 26px;
-    align-items: stretch;
-}
-
-/* ==========================
-   8. CARTÕES
-========================== */
-
-.card {
-    overflow: hidden;
-    background: var(--branco);
-    border: 1px solid var(--borda);
-    border-radius: 20px;
-    box-shadow: var(--sombra);
-    transition: transform 0.25s, box-shadow 0.25s;
-}
-
-.card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 40px rgba(50, 30, 90, 0.13);
-}
-
-.card img {
-    display: block;
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    background: var(--roxo-claro);
-}
-
-.card-conteudo {
-    padding: 22px;
-}
-
-.card-conteudo h3 {
-    margin: 0 0 10px;
-    font-size: 20px;
-    line-height: 1.4;
-}
-
-.preco {
-    display: inline-block;
-    margin: 8px 0;
-    color: var(--verde);
-    font-size: 24px;
-    font-weight: 800;
-}
-
-.descricao {
-    margin: 8px 0 16px;
-    color: var(--texto-suave);
+    margin-top: 15px;
     font-size: 14px;
-    line-height: 1.8;
     overflow-wrap: anywhere;
 }
 
-/* ==========================
-   9. LINKS
-========================== */
-
-a {
-    color: var(--roxo);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-a:hover {
-    color: var(--roxo-escuro);
-}
-
-/* ==========================
-   10. RODAPÉ
-========================== */
-
-footer {
-    margin-top: 70px;
-    padding: 30px 20px;
-    background: var(--roxo-escuro);
-    color: #e8e0fa;
-    text-align: center;
-    font-size: 14px;
-}
-
-footer p {
-    margin: 0;
-}
-
-/* ==========================
-   11. RESPONSIVIDADE
-========================== */
-
-@media (max-width: 600px) {
-    .cabecalho {
-        padding: 40px 18px;
-    }
-
-    .cabecalho p {
-        font-size: 15px;
-    }
-
-    .container {
-        width: calc(100% - 28px);
-        margin: 28px auto;
-    }
-
-    .formulario {
-        padding: 22px 18px;
-        margin-bottom: 40px;
-        border-radius: 17px;
-    }
-
-    h2 {
-        font-size: 23px;
-    }
-
-    .produtos {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-
-    .card img {
-        height: 230px;
-    }
-
-    .card-conteudo {
-        padding: 18px;
-    }
-
-    footer {
-        margin-top: 45px;
-    }
-}
-
-/* ==========================
-   12. ACESSIBILIDADE
-========================== */
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-        transition-duration: 0.01ms !important;
-        animation-duration: 0.01ms !important;
-    }
-} 
-
-/* Centralizar o conteúdo na tela */
-
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-/* Cabeçalho ocupa a largura toda */
-.cabecalho {
-    width: 100%;
-    text-align: center;
-}
-
-/* Conteúdo principal centralizado */
-.container {
-    width: min(1000px, calc(100% - 32px));
-    margin: 32px auto;
-}
-
-/* Formulário no centro */
-.formulario {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto 40px;
-}
-
-/* Produtos organizados e centralizados */
-.produtos {
-    display: grid;
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(220px, 280px)
-    );
-    justify-content: center;
-    gap: 20px;
-}
-
-/* Rodapé no final da página */
-footer {
-    width: 100%;
-    margin-top: auto;
-    text-align: center;
-}
-
-/* Lista de produtos cadastrados */
-
-.lista-produtos {
-    list-style: none;
-    padding: 0;
-    margin: 0 auto;
-    width: 100%;
-    max-width: 650px;
-    display: grid;
-    gap: 14px;
-}
-
-.lista-produtos li {
-    padding: 18px 22px;
-    background: #ffffff;
-    border: 1px solid #e9e4f2;
-    border-left: 5px solid #6c3ce9;
-    border-radius: 12px;
-    box-shadow: 0 5px 18px rgba(50, 30, 90, 0.06);
-    color: #29243a;
-    overflow-wrap: anywhere;
-}
+/* =========================
+   SEÇÃO DE PRODUTOS
+========================= */
 
 .secao-produtos {
     width: 100%;
-    margin: 50px auto;
 }
 
 .titulo-produtos {
+    margin-bottom: 30px;
     text-align: center;
-    margin: 0 auto 30px;
 }
 
 .titulo-produtos h2 {
-    margin: 10px 0;
-    font-size: clamp(26px, 4vw, 36px);
-}
-
-.titulo-produtos p {
-    color: #777187;
-}
-
-.etiqueta-produtos {
-    display: inline-block;
-    padding: 6px 14px;
-    border-radius: 30px;
-    background: #eee7ff;
-    color: #6c3ce9;
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 1.5px;
+    font-size: 32px;
 }
 
 .linha-decorativa {
-    width: 60px;
-    height: 5px;
-    margin: 20px auto;
+    width: 55px;
+    height: 4px;
+    margin: 18px auto 0;
     border-radius: 10px;
-    background: linear-gradient(90deg, #6c3ce9, #f3b6d2);
-}
-
-@media (max-width: 600px) {
-    .secao-produtos {
-        margin: 35px auto;
-    }
-
-    .lista-produtos li {
-        padding: 15px;
-    }
+    background: var(--rosa);
 }
 
 /* Grade de produtos */
 
 .produtos {
     display: grid;
-    grid-template-columns: repeat(
-        auto-fit,
-        minmax(min(100%, 250px), 1fr)
-    );
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 25px;
     align-items: stretch;
 }
 
+/* Mensagem quando não existem produtos */
+
+.produtos > p {
+    grid-column: 1 / -1;
+    padding: 30px;
+    text-align: center;
+    color: var(--texto-claro);
+    background: var(--branco);
+    border: 1px dashed var(--borda);
+    border-radius: 12px;
+}
+
+/* =========================
+   CARTÕES DE PRODUTOS
+========================= */
+
 .card {
+    min-width: 0;
     overflow: hidden;
-    background: #ffffff;
-    border: 1px solid #e9e4f2;
-    border-radius: 18px;
-    box-shadow: 0 8px 25px rgba(50, 30, 90, 0.08);
+    display: flex;
+    flex-direction: column;
+
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 13px;
+    box-shadow: var(--sombra);
+
     transition: transform 0.25s, box-shadow 0.25s;
 }
 
 .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(50, 30, 90, 0.15);
+    box-shadow: 0 14px 30px rgba(73, 37, 49, 0.12);
 }
 
 .card img {
     display: block;
     width: 100%;
-    height: 250px;
+    height: 280px;
     object-fit: cover;
-    background: #eee7ff;
+    background: var(--rosa-claro);
 }
 
 .card-conteudo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     padding: 20px;
 }
 
 .card-conteudo h3 {
-    margin: 0 0 10px;
-    color: #241044;
-    font-size: 21px;
-}
-
-.descricao {
-    color: #777187;
-    font-size: 14px;
-    line-height: 1.7;
+    margin-bottom: 8px;
+    font-size: 18px;
+    line-height: 1.4;
     overflow-wrap: anywhere;
 }
 
+.descricao {
+    margin-bottom: 18px;
+    color: var(--texto-claro);
+    font-size: 14px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+}
+
 .preco {
-    display: block;
-    margin: 15px 0;
-    color: #16865b;
-    font-size: 23px;
+    margin-top: auto;
+    padding-top: 12px;
+    color: var(--rosa-escuro);
+    font-size: 21px;
     font-weight: 800;
 }
 
-@media (max-width: 600px) {
+/* =========================
+   RODAPÉ
+========================= */
+
+.rodape {
+    padding: 35px 20px;
+    background: #30272b;
+    color: var(--branco);
+    text-align: center;
+}
+
+.logo-rodape {
+    display: inline-block;
+    color: var(--branco);
+}
+
+.rodape > p {
+    margin-top: 8px;
+    color: #e5d7dc;
+    font-size: 14px;
+}
+
+.rodape .direitos {
+    margin-top: 20px;
+    color: #bdaeb4;
+    font-size: 12px;
+}
+
+/* =========================
+   TABLETS
+========================= */
+
+@media (max-width: 850px) {
     .produtos {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
     }
 
     .card img {
-        height: 230px;
+        height: 250px;
+    }
+
+    .cabecalho-conteudo {
+        gap: 16px;
+    }
+
+    nav {
+        gap: 16px;
     }
 }
 
+/* =========================
+   CELULARES
+========================= */
 
+@media (max-width: 560px) {
+    .cabecalho-conteudo {
+        flex-direction: column;
+        padding: 14px 16px;
+        gap: 10px;
+    }
+
+    nav {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+    }
+
+    nav a {
+        font-size: 12px;
+    }
+
+    .banner {
+        min-height: 300px;
+        padding: 50px 20px;
+    }
+
+    .banner h1 {
+        font-size: 36px;
+    }
+
+    .banner p {
+        font-size: 14px;
+    }
+
+    .container {
+        width: calc(100% -
