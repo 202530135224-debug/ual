@@ -1,86 +1,85 @@
+
 const URL = "https://oujdqmplnzyzsodhjkgn.supabase.co";
-
-const KEY = "sb_publishable_JmDk84cFZpi8N2N-X1ow7g_G2aCxTWu";
-
+const KEY = "SUA_CHAVE_PUBLICA_SUPABASE";
 
 // SALVAR PRODUTO
 async function salvar() {
+    const nome = document.getElementById("nome").value.trim();
+    const mensagem = document.getElementById("mensagem");
 
-    const nome = document.getElementById("nome").value;
-
-    if (nome === "") {
+    if (!nome) {
         alert("Digite o nome do produto!");
         return;
     }
 
-    const resposta = await fetch(
-        URL + "/rest/v1/produtos",
-        {
+    try {
+        const resposta = await fetch(`${URL}/rest/v1/produtos`, {
             method: "POST",
-
             headers: {
                 "apikey": KEY,
-                "Authorization": "Bearer " + KEY,
-                "Content-Type": "application/json"
+                "Authorization": `Bearer ${KEY}`,
+                "Content-Type": "application/json",
+                "Prefer": "return=representation"
             },
+            body: JSON.stringify({ nome })
+        });
 
-            body: JSON.stringify({
-                nome: nome
-            })
+        const resultado = await resposta.text();
+
+        if (!resposta.ok) {
+            console.error("Erro ao salvar:", resposta.status, resultado);
+            mensagem.innerText = `Erro ${resposta.status}: ${resultado}`;
+            return;
         }
-    );
 
-    if (resposta.ok) {
-
-        document.getElementById("mensagem").innerText =
-            "Produto salvo!";
-
+        mensagem.innerText = "Produto salvo!";
         document.getElementById("nome").value = "";
+        await listarProdutos();
 
-        listarProdutos();
-
-    } else {
-
-        document.getElementById("mensagem").innerText =
-            "Erro ao salvar.";
-
+    } catch (erro) {
+        console.error("Erro de conexão:", erro);
+        mensagem.innerText = "Erro de conexão com o Supabase.";
     }
 }
 
-
 // LISTAR PRODUTOS
 async function listarProdutos() {
-
-    const resposta = await fetch(
-        URL + "/rest/v1/produtos?select=*",
-        {
-            method: "GET",
-
-            headers: {
-                "apikey": KEY,
-                "Authorization": "Bearer " + KEY
-            }
-        }
-    );
-
-    const produtos = await resposta.json();
-
     const lista = document.getElementById("lista");
 
-    lista.innerHTML = "";
+    try {
+        const resposta = await fetch(
+            `${URL}/rest/v1/produtos?select=*`,
+            {
+                headers: {
+                    "apikey": KEY,
+                    "Authorization": `Bearer ${KEY}`
+                }
+            }
+        );
 
-    produtos.forEach(produto => {
+        const resultado = await resposta.text();
 
-        const item = document.createElement("li");
+        if (!resposta.ok) {
+            console.error("Erro ao listar:", resposta.status, resultado);
+            document.getElementById("mensagem").innerText =
+                `Erro ao listar (${resposta.status}): ${resultado}`;
+            return;
+        }
 
-        item.innerText =
-            produto.id + " - " + produto.nome;
+        const produtos = JSON.parse(resultado);
+        lista.innerHTML = "";
 
-        lista.appendChild(item);
+        produtos.forEach(produto => {
+            const item = document.createElement("li");
+            item.innerText = `${produto.id} - ${produto.nome}`;
+            lista.appendChild(item);
+        });
 
-    });
+    } catch (erro) {
+        console.error("Erro:", erro);
+        document.getElementById("mensagem").innerText =
+            "Erro de conexão ao listar produtos.";
+    }
 }
 
-
-// CARREGAR PRODUTOS AO ABRIR A PÁGINA
 listarProdutos();
