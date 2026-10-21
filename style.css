@@ -1,147 +1,355 @@
 
+/* ==========================
+   1. CONFIGURAÇÕES GERAIS
+========================== */
+
+:root {
+    --roxo-escuro: #241044;
+    --roxo: #6c3ce9;
+    --roxo-claro: #eee7ff;
+    --rosa: #f3b6d2;
+    --fundo: #f8f7fc;
+    --branco: #ffffff;
+    --texto: #29243a;
+    --texto-suave: #777187;
+    --borda: #e9e4f2;
+    --verde: #16865b;
+    --sombra: 0 10px 35px rgba(50, 30, 90, 0.08);
+}
+
 * {
     box-sizing: border-box;
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f8f6f3;
-    color: #292524;
+html {
+    scroll-behavior: smooth;
 }
 
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--fundo);
+    color: var(--texto);
+    line-height: 1.6;
+}
+
+/* ==========================
+   2. CABEÇALHO
+========================== */
+
 .cabecalho {
-    background: #292524;
-    color: white;
+    background: linear-gradient(
+        135deg,
+        var(--roxo-escuro),
+        var(--roxo)
+    );
+    color: var(--branco);
     text-align: center;
-    padding: 28px 16px;
+    padding: 55px 20px;
+    position: relative;
+    overflow: hidden;
 }
 
 .cabecalho h1 {
-    margin: 0 0 8px;
+    margin: 0 0 12px;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 800;
+    letter-spacing: -1px;
 }
 
 .cabecalho p {
-    margin: 0;
-    color: #e7e5e4;
+    margin: 0 auto;
+    max-width: 600px;
+    color: #eee7ff;
+    font-size: 17px;
 }
+
+/* ==========================
+   3. CONTEÚDO PRINCIPAL
+========================== */
 
 .container {
-    width: min(100% - 32px, 1000px);
-    margin: 32px auto;
-}
-
-.formulario {
-    max-width: 600px;
-    margin: 0 auto 40px;
-    padding: 24px;
-    background: white;
-    border-radius: 14px;
-    box-shadow: 0 4px 18px #0000000a;
+    width: min(1100px, calc(100% - 36px));
+    margin: 45px auto;
 }
 
 h2 {
-    margin-top: 0;
+    color: var(--roxo-escuro);
+    font-size: 27px;
+    margin: 0 0 22px;
+    font-weight: 750;
+}
+
+h3 {
+    color: var(--roxo-escuro);
+}
+
+/* ==========================
+   4. FORMULÁRIO
+========================== */
+
+.formulario {
+    max-width: 650px;
+    margin: 0 auto 55px;
+    padding: 32px;
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 22px;
+    box-shadow: var(--sombra);
+}
+
+.formulario h2 {
+    text-align: center;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
 }
 
 label {
     margin-top: 8px;
-    font-weight: bold;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--roxo-escuro);
 }
 
 input,
-textarea {
+textarea,
+select {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #d6d3d1;
-    border-radius: 8px;
+    padding: 14px 16px;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    background: #fdfcff;
+    color: var(--texto);
     font: inherit;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #aaa3b8;
 }
 
 input:focus,
-textarea:focus {
-    outline: 2px solid #a8a29e;
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--roxo);
+    box-shadow: 0 0 0 4px rgba(108, 60, 233, 0.12);
 }
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* ==========================
+   5. BOTÕES
+========================== */
 
 button {
     margin-top: 12px;
-    padding: 14px;
+    padding: 14px 22px;
     border: none;
-    border-radius: 8px;
-    background: #292524;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
+    border-radius: 12px;
+    background: linear-gradient(
+        135deg,
+        var(--roxo),
+        #875cf6
+    );
+    color: var(--branco);
+    font-size: 15px;
+    font-weight: 750;
     cursor: pointer;
+    box-shadow: 0 5px 15px rgba(108, 60, 233, 0.22);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 button:hover {
-    background: #57534e;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(108, 60, 233, 0.3);
 }
 
+button:active {
+    transform: translateY(0);
+}
+
+button:focus-visible {
+    outline: 3px solid var(--rosa);
+    outline-offset: 3px;
+}
+
+/* ==========================
+   6. MENSAGENS
+========================== */
+
 #mensagem {
+    margin-top: 16px;
+    padding: 12px;
+    border-radius: 10px;
     overflow-wrap: anywhere;
 }
 
+#mensagem:empty {
+    display: none;
+}
+
+/* ==========================
+   7. GRADE DE PRODUTOS
+========================== */
+
 .produtos {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(min(100%, 240px), 1fr)
+    );
+    gap: 26px;
+    align-items: stretch;
 }
+
+/* ==========================
+   8. CARTÕES
+========================== */
 
 .card {
     overflow: hidden;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px #0000000d;
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 20px;
+    box-shadow: var(--sombra);
+    transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(50, 30, 90, 0.13);
 }
 
 .card img {
     display: block;
     width: 100%;
-    height: 240px;
+    height: 250px;
     object-fit: cover;
+    background: var(--roxo-claro);
 }
 
 .card-conteudo {
-    padding: 16px;
+    padding: 22px;
 }
 
 .card-conteudo h3 {
-    margin-top: 0;
+    margin: 0 0 10px;
+    font-size: 20px;
+    line-height: 1.4;
 }
 
 .preco {
-    color: #166534;
-    font-size: 21px;
-    font-weight: bold;
+    display: inline-block;
+    margin: 8px 0;
+    color: var(--verde);
+    font-size: 24px;
+    font-weight: 800;
 }
 
 .descricao {
-    color: #57534e;
-    line-height: 1.5;
+    margin: 8px 0 16px;
+    color: var(--texto-suave);
+    font-size: 14px;
+    line-height: 1.8;
     overflow-wrap: anywhere;
 }
 
-footer {
-    padding: 20px;
-    text-align: center;
-    color: #78716c;
+/* ==========================
+   9. LINKS
+========================== */
+
+a {
+    color: var(--roxo);
+    text-decoration: none;
+    transition: color 0.2s;
 }
 
-@media (max-width: 480px) {
+a:hover {
+    color: var(--roxo-escuro);
+}
+
+/* ==========================
+   10. RODAPÉ
+========================== */
+
+footer {
+    margin-top: 70px;
+    padding: 30px 20px;
+    background: var(--roxo-escuro);
+    color: #e8e0fa;
+    text-align: center;
+    font-size: 14px;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* ==========================
+   11. RESPONSIVIDADE
+========================== */
+
+@media (max-width: 600px) {
+    .cabecalho {
+        padding: 40px 18px;
+    }
+
+    .cabecalho p {
+        font-size: 15px;
+    }
+
+    .container {
+        width: calc(100% - 28px);
+        margin: 28px auto;
+    }
+
     .formulario {
-        padding: 18px;
+        padding: 22px 18px;
+        margin-bottom: 40px;
+        border-radius: 17px;
+    }
+
+    h2 {
+        font-size: 23px;
+    }
+
+    .produtos {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 
     .card img {
-        height: 200px;
+        height: 230px;
+    }
+
+    .card-conteudo {
+        padding: 18px;
+    }
+
+    footer {
+        margin-top: 45px;
     }
 }
 
+/* ==========================
+   12. ACESSIBILIDADE
+========================== */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
