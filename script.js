@@ -1,4 +1,4 @@
-
+```javascript
 const URL_SUPABASE = "https://oujdqmplnzyzsodhjkgn.supabase.co";
 const KEY = "sb_publishable_JmDk84cFZpi8N2N-X1ow7g_G2aCxTWu";
 
@@ -18,11 +18,18 @@ formulario.addEventListener("submit", async function (evento) {
 
     const nome = document.getElementById("nome").value.trim();
     const descricao = document.getElementById("descricao").value.trim();
-    const preco = Number(document.getElementById("preco").value);
+    const precoTexto = document.getElementById("preco").value.trim();
+    const preco = Number(precoTexto);
     const imagem = document.getElementById("imagem").value.trim();
 
-    if (!nome || !descricao || !imagem ||
-        !Number.isFinite(preco) || preco <= 0) {
+    if (
+        !nome ||
+        !descricao ||
+        !imagem ||
+        precoTexto === "" ||
+        !Number.isFinite(preco) ||
+        preco <= 0
+    ) {
         mensagem.textContent = "Preencha todos os campos corretamente.";
         return;
     }
@@ -65,13 +72,14 @@ formulario.addEventListener("submit", async function (evento) {
         if (!resposta.ok) {
             const erro = await resposta.text();
             console.error("Erro ao salvar:", erro);
+
             mensagem.textContent =
                 "Não foi possível salvar. Confira as colunas e permissões do Supabase.";
             return;
         }
 
-        mensagem.textContent = "Produto cadastrado com sucesso!";
         formulario.reset();
+        mensagem.textContent = "Produto cadastrado com sucesso!";
 
         await listarProdutos();
 
@@ -118,7 +126,7 @@ async function listarProdutos() {
 
             const foto = document.createElement("img");
             foto.src = produto.imagem;
-            foto.alt = produto.nome;
+            foto.alt = produto.nome || "Produto";
             foto.loading = "lazy";
 
             foto.addEventListener("error", () => {
@@ -130,20 +138,35 @@ async function listarProdutos() {
             conteudo.className = "card-conteudo";
 
             const titulo = document.createElement("h3");
-            titulo.textContent = produto.nome;
+            titulo.textContent = produto.nome || "Produto sem nome";
 
             const texto = document.createElement("p");
             texto.className = "descricao";
-            texto.textContent = produto.descricao;
+            texto.textContent = produto.descricao || "Sem descrição.";
 
-            const preco = document.createElement("p");
-            preco.className = "preco";
-            preco.textContent = Number(produto.preco).toLocaleString(
-                "pt-BR",
-                { style: "currency", currency: "BRL" }
-            );
+            const precoElemento = document.createElement("p");
+            precoElemento.className = "preco";
 
-            conteudo.append(titulo, texto, preco);
+            const valor = Number(produto.preco);
+
+            if (
+                produto.preco === null ||
+                produto.preco === undefined ||
+                produto.preco === "" ||
+                !Number.isFinite(valor)
+            ) {
+                precoElemento.textContent = "Preço não informado";
+            } else {
+                precoElemento.textContent = valor.toLocaleString(
+                    "pt-BR",
+                    {
+                        style: "currency",
+                        currency: "BRL"
+                    }
+                );
+            }
+
+            conteudo.append(titulo, texto, precoElemento);
             card.append(foto, conteudo);
             lista.appendChild(card);
         });
@@ -156,3 +179,4 @@ async function listarProdutos() {
 
 // CARREGAR AO ABRIR O SITE
 listarProdutos();
+```
