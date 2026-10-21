@@ -1,6 +1,6 @@
 
 const URL = "https://oujdqmplnzyzsodhjkgn.supabase.co";
-const KEY = "SUA_CHAVE_PUBLICA_SUPABASE";
+const KEY = "sb_publishable_JmDk84cFZpi8N2N-X1ow7g_G2aCxTWu";
 
 // SALVAR PRODUTO
 async function salvar() {
