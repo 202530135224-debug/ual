@@ -352,4 +352,51 @@ footer p {
         transition-duration: 0.01ms !important;
         animation-duration: 0.01ms !important;
     }
+} 
+
+/* Centralizar o conteúdo na tela */
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+/* Cabeçalho ocupa a largura toda */
+.cabecalho {
+    width: 100%;
+    text-align: center;
+}
+
+/* Conteúdo principal centralizado */
+.container {
+    width: min(1000px, calc(100% - 32px));
+    margin: 32px auto;
+}
+
+/* Formulário no centro */
+.formulario {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 40px;
+}
+
+/* Produtos organizados e centralizados */
+.produtos {
+    display: grid;
+    grid-template-columns: repeat(
+        auto-fit,
+        minmax(220px, 280px)
+    );
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Rodapé no final da página */
+footer {
+    width: 100%;
+    margin-top: auto;
+    text-align: center;
+}
+
